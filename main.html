@@ -20,7 +20,7 @@
         </tr>
       </thead>
       <tbody id="output">
-        <tr id="loading-row">
+        <tr id="loading">
           <td colspan="2">Loading...</td>
         </tr>
       </tbody>
@@ -37,7 +37,7 @@
       // Function to update the table with the results
       function updateTable(results) {
         const table = document.getElementById("output");
-        const loadingRow = document.getElementById("loading-row");
+        const loadingRow = document.getElementById("loading");
 
         // Remove the loading row
         table.removeChild(loadingRow);
