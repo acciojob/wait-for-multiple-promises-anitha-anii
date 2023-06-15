@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-
 <html>
   <head>
     <link rel="stylesheet" href="styles.css" />
@@ -23,7 +21,51 @@
       <tbody id="output"></tbody>
     </table>
 
-    <script type="text/javascript" src="./script.js"></script>
+    <script type="text/javascript">
+      function createRandomPromise(min, max) {
+        const delay = Math.floor(Math.random() * (max - min + 1)) + min;
+        return new Promise(resolve => {
+          setTimeout(() => resolve(delay), delay * 1000);
+        });
+      }
+
+      // Function to update the table with the results
+      function updateTable(results) {
+        const table = document.getElementById("output");
+
+        // Clear the loading row
+        table.innerHTML = "";
+
+        // Create rows for each result
+        results.forEach((result, index) => {
+          const row = table.insertRow();
+          const cell1 = row.insertCell();
+          const cell2 = row.insertCell();
+          cell1.textContent = `Promise ${index + 1}`;
+          cell2.textContent = result;
+        });
+
+        // Calculate and insert the total time taken
+        const total = results.reduce((sum, result) => sum + result, 0);
+        const totalRow = table.insertRow();
+        const totalCell1 = totalRow.insertCell();
+        const totalCell2 = totalRow.insertCell();
+        totalCell1.textContent = "Total";
+        totalCell2.textContent = total.toFixed(3);
+      }
+
+      // Create an array of 3 promises with random delays
+      const promises = [
+        createRandomPromise(1, 3),
+        createRandomPromise(1, 3),
+        createRandomPromise(1, 3)
+      ];
+
+      Promise.all(promises)
+        .then(updateTable)
+        .catch(error => console.log(error));
+    </script>
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
