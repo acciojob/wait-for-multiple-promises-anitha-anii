@@ -1,3 +1,4 @@
+
 <html>
   <head>
     <link rel="stylesheet" href="styles.css" />
@@ -18,7 +19,11 @@
           <th>Time taken (s)</th>
         </tr>
       </thead>
-      <tbody id="output"></tbody>
+      <tbody id="output">
+        <tr id="loading-row">
+          <td colspan="2">Loading...</td>
+        </tr>
+      </tbody>
     </table>
 
     <script type="text/javascript">
@@ -32,9 +37,10 @@
       // Function to update the table with the results
       function updateTable(results) {
         const table = document.getElementById("output");
+        const loadingRow = document.getElementById("loading-row");
 
-        // Clear the loading row
-        table.innerHTML = "";
+        // Remove the loading row
+        table.removeChild(loadingRow);
 
         // Create rows for each result
         results.forEach((result, index) => {
@@ -73,3 +79,4 @@
     ></script>
   </body>
 </html>
+
